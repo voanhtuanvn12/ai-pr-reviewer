@@ -2,8 +2,8 @@
 
 [![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue.svg)](https://github.com/features/actions)
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC)
-[![GitHub release](https://img.shields.io/github/release/tuan-vo/my-pr-reviewer.svg)](https://github.com/tuan-vo/my-pr-reviewer/releases)
-[![GitHub stars](https://img.shields.io/github/stars/tuan-vo/my-pr-reviewer.svg)](https://github.com/tuan-vo/my-pr-reviewer/stargazers)
+[![GitHub release](https://img.shields.io/github/release/voanhtuanvn12/my-pr-reviewer.svg)](https://github.com/voanhtuanvn12/my-pr-reviewer/releases)
+[![GitHub stars](https://img.shields.io/github/stars/voanhtuanvn12/my-pr-reviewer.svg)](https://github.com/voanhtuanvn12/my-pr-reviewer/stargazers)
 
 > An intelligent GitHub Action that provides automated code review for Pull Requests using AI
 
@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: AI PR Review
-        uses: tuan-vo/my-pr-reviewer@main
+        uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: 'copilot'
@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: AI PR Review
-        uses: tuan-vo/my-pr-reviewer@main
+        uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: 'copilot'
@@ -119,7 +119,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: AI PR Review
-        uses: tuan-vo/my-pr-reviewer@main
+        uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: 'copilot'
@@ -197,7 +197,7 @@ on:
 
 ```yaml
 - name: AI PR Review
-  uses: tuan-vo/my-pr-reviewer@main
+  uses: voanhtuanvn12/my-pr-reviewer@master
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
     ai-provider: 'copilot'
@@ -213,7 +213,7 @@ on:
 
 ```yaml
 - name: AI PR Review
-  uses: tuan-vo/my-pr-reviewer@main
+  uses: voanhtuanvn12/my-pr-reviewer@master
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
     ai-provider: 'openai'
@@ -228,7 +228,7 @@ on:
 
 ```yaml
 - name: AI PR Review
-  uses: tuan-vo/my-pr-reviewer@main
+  uses: voanhtuanvn12/my-pr-reviewer@master
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
     ai-provider: 'anthropic'
@@ -254,7 +254,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: tuan-vo/my-pr-reviewer@main
+      - uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -282,7 +282,7 @@ jobs:
           fetch-depth: 0
           
       - name: AI PR Review
-        uses: tuan-vo/my-pr-reviewer@main
+        uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: 'openai'
@@ -310,7 +310,7 @@ jobs:
     if: github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
-      - uses: tuan-vo/my-pr-reviewer@main
+      - uses: voanhtuanvn12/my-pr-reviewer@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: 'copilot'
@@ -351,7 +351,7 @@ exclude-patterns: |
 
 ```bash
 # Clone the repository
-git clone https://github.com/tuan-vo/my-pr-reviewer.git
+git clone https://github.com/voanhtuanvn12/my-pr-reviewer.git
 cd my-pr-reviewer
 
 # Install dependencies
@@ -451,11 +451,11 @@ For more details, see our [Contributing Guide](CONTRIBUTING.md).
 
 ## 🐛 Bug Reports & Feature Requests
 
-Please use the [GitHub Issues](https://github.com/tuan-vo/my-pr-reviewer/issues) to report bugs or request features:
+Please use the [GitHub Issues](https://github.com/voanhtuanvn12/my-pr-reviewer/issues) to report bugs or request features:
 
 - **Bug Report**: Use the bug report template
 - **Feature Request**: Use the feature request template
-- **Discussion**: Use [GitHub Discussions](https://github.com/tuan-vo/my-pr-reviewer/discussions) for questions and ideas
+- **Discussion**: Use [GitHub Discussions](https://github.com/voanhtuanvn12/my-pr-reviewer/discussions) for questions and ideas
 
 ## 📄 License
 
@@ -463,8 +463,8 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ## 🙋‍♂️ Support
 
-- **Issues**: [GitHub Issues](https://github.com/tuan-vo/my-pr-reviewer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/tuan-vo/my-pr-reviewer/discussions)
+- **Issues**: [GitHub Issues](https://github.com/voanhtuanvn12/my-pr-reviewer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/voanhtuanvn12/my-pr-reviewer/discussions)
 - **Documentation**: Check the [examples](examples/) directory
 - **Email**: tuan.vo.dev@gmail.com (for security issues or urgent matters)
 
@@ -480,5 +480,5 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 <div align="center">
   <strong>Happy Coding! 🚀</strong>
   <br>
-  <sub>Made with ❤️ by <a href="https://github.com/tuan-vo">@tuan-vo</a></sub>
+  <sub>Made with ❤️ by <a href="https://github.com/voanhtuanvn12">@voanhtuanvn12</a></sub>
 </div>

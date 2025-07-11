@@ -1,7 +1,7 @@
 ## Contributing
 
-[fork]: https://github.com/tuan-vo/my-pr-reviewer/fork
-[pr]: https://github.com/tuan-vo/my-pr-reviewer/compare
+[fork]: https://github.com/voanhtuanvn12/my-pr-reviewer/fork
+[pr]: https://github.com/voanhtuanvn12/my-pr-reviewer/compare
 [code-of-conduct]: CODE_OF_CONDUCT.md
 
 Hi there! We're thrilled that you'd like to contribute to this project. Your help is essential for keeping it great.

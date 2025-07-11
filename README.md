@@ -10,6 +10,7 @@
 ## ✨ Features
 
 - 🤖 **AI-Powered Reviews**: Leverages advanced AI models to analyze code changes
+- 🏷️ **Auto-Generated Titles**: Automatically updates PR titles with AI-generated summaries
 - 📝 **Context-Aware Analysis**: Reviews code with comprehensive context understanding
 - 🔄 **Multi-Provider Support**: Works with GitHub Copilot, OpenAI, and Anthropic
 - 💬 **Inline Comments**: Provides detailed feedback directly on code lines
@@ -178,6 +179,7 @@ on:
 | `ai-provider` | AI service provider | `copilot` | `copilot` (others coming soon) |
 | `review-level` | Review thoroughness | `medium` | `low`, `medium`, `high` |
 | `exclude-patterns` | Files to exclude from review | `*.md,*.txt,*.json,package-lock.json` | Comma-separated patterns |
+| `auto-update-title` | Automatically update PR title with AI-generated title | `false` | `true`, `false` |
 | `copilot-token` | GitHub Copilot API token | - | Required for Copilot |
 | `openai-api-key` | OpenAI API key | - | Not yet implemented |
 | `anthropic-api-key` | Anthropic API key | - | Not yet implemented |
@@ -289,6 +291,7 @@ jobs:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           review-level: 'high'
           exclude-patterns: '*.md,*.txt,*.json,package-lock.json,*.yaml,*.yml,dist/*'
+          auto-update-title: 'true'
           
       - name: Review Results
         run: |

@@ -11,6 +11,8 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { analyzeCodeChanges } from './service/ai/codeReviewer';
 import { createReviewComments } from './service/github/reviewComments';
+import { createPrTitle } from './service/github/createPrTitle';
+import { updatePrTitle } from './service/github/updatePrTitle';
 import { getFileLanguage } from './helpers/getFileLanguage';
 import { DetailedFileChange } from './types/DetailedFileChange';
 
@@ -38,6 +40,7 @@ async function runGitHubAction(): Promise<void> {
     const aiProvider = core.getInput('ai-provider') || 'copilot';
     const reviewLevel = core.getInput('review-level') || 'medium';
     const excludePatterns = core.getInput('exclude-patterns') || '*.md,*.txt,*.json,package-lock.json';
+    const autoUpdateTitle = core.getInput('auto-update-title') === 'true';
     
     // Set environment variables for AI services
     if (copilotToken) process.env.COPILOT_TOKEN = copilotToken;
@@ -83,6 +86,39 @@ async function runGitHubAction(): Promise<void> {
       core.setOutput('review-status', 'skipped');
       core.setOutput('suggestions-count', '0');
       return;
+    }
+
+    // Generate and update PR title based on file changes
+    if (autoUpdateTitle) {
+      try {
+        core.info('🏷️ Generating AI-powered PR title...');
+        
+        // Create a summary of file changes for title generation
+        const fileChangesSummary = fileChanges.map(file => 
+          `File: ${file.filename} (${file.status}) - ${file.changes} changes`
+        ).join('\n');
+        
+        const newTitle = await createPrTitle({ fileChanges: fileChangesSummary });
+        
+        if (newTitle) {
+          await updatePrTitle({
+            octokit,
+            issueContext: {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              number: pullRequest.number
+            },
+            title: newTitle,
+            pullRequest
+          });
+          
+          core.info(`✅ Updated PR title to: ${newTitle}`);
+        } else {
+          core.warning('⚠️ Failed to generate new PR title');
+        }
+      } catch (error: any) {
+        core.warning(`⚠️ Failed to update PR title: ${error.message}`);
+      }
     }
     
     // Analyze with AI

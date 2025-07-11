@@ -37,6 +37,11 @@ inputs:
     description: 'File patterns to exclude from review (comma-separated)'
     required: false
     default: '*.md,*.txt,*.json,package-lock.json'
+    
+  auto-update-title:
+    description: 'Automatically update PR title with AI-generated title'
+    required: false
+    default: 'false'
 
 outputs:
   suggestions-count:

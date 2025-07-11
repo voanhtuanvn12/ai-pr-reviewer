@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsup",
     "build:action": "tsup",
-    "test": "vitest",
+    "test": "vitest run --reporter=verbose --passWithNoTests",
+    "test:watch": "vitest",
     "package": "npm run build && git add dist/",
     "release": "npm run package && git commit -m 'Update compiled action' && git push"
   },

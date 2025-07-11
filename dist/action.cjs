@@ -31141,7 +31141,7 @@ async function createPullRequestReview({
   }
   const reviewBody = createReviewSummary(suggestions);
   try {
-    await octokit.pulls.createReview({
+    await octokit.rest.pulls.createReview({
       owner,
       repo,
       pull_number: pullNumber,
@@ -31162,13 +31162,13 @@ async function createLineComments({
   pullNumber,
   suggestions
 }) {
-  const { data: pr } = await octokit.pulls.get({
+  const { data: pr } = await octokit.rest.pulls.get({
     owner,
     repo,
     pull_number: pullNumber
   });
   const commitId = pr.head.sha;
-  const { data: files } = await octokit.pulls.listFiles({
+  const { data: files } = await octokit.rest.pulls.listFiles({
     owner,
     repo,
     pull_number: pullNumber
@@ -31181,7 +31181,7 @@ async function createLineComments({
       if (position === null) continue;
       const body = formatReviewComment(suggestion);
       if (!body) continue;
-      await octokit.pulls.createReviewComment({
+      await octokit.rest.pulls.createReviewComment({
         owner,
         repo,
         pull_number: pullNumber,
@@ -31224,7 +31224,7 @@ async function createSummaryComment({
 }) {
   const totalSuggestions = groupedSuggestions.high.length + groupedSuggestions.medium.length + groupedSuggestions.low.length;
   if (totalSuggestions === 0) {
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner,
       repo,
       issue_number: pullNumber,
@@ -31257,7 +31257,7 @@ ${groupedSuggestions.low.map((s2) => `- **${s2.filename}:${s2.line}** - ${s2.mes
 
 ---
 *Powered by AI Code Review Bot* \u{1F916}`;
-  await octokit.issues.createComment({
+  await octokit.rest.issues.createComment({
     owner,
     repo,
     issue_number: pullNumber,

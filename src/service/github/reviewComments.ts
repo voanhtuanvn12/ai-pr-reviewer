@@ -1,7 +1,5 @@
 // src/service/github/reviewComments.ts
 
-import { ProbotOctokit } from "probot";
-
 interface ReviewSuggestion {
     filename: string;
     line: number;
@@ -111,7 +109,7 @@ async function createPullRequestReview({
     const reviewBody = createReviewSummary(suggestions);
 
     try {
-        await octokit.pulls.createReview({
+        await octokit.rest.pulls.createReview({
             owner,
             repo,
             pull_number: pullNumber,
@@ -133,14 +131,14 @@ async function createLineComments({
     pullNumber,
     suggestions
 }: {
-    octokit: ProbotOctokit;
+    octokit: any;
     owner: string;
     repo: string;
     pullNumber: number;
     suggestions: ReviewSuggestion[];
 }) {
 
-    const { data: pr } = await octokit.pulls.get({
+    const { data: pr } = await octokit.rest.pulls.get({
         owner,
         repo,
         pull_number: pullNumber,
@@ -148,7 +146,7 @@ async function createLineComments({
 
     const commitId = pr.head.sha;
 
-    const { data: files } = await octokit.pulls.listFiles({
+    const { data: files } = await octokit.rest.pulls.listFiles({
         owner,
         repo,
         pull_number: pullNumber,
@@ -157,7 +155,7 @@ async function createLineComments({
 
     for (const suggestion of suggestions) {
         try {
-            const file = files.find(f => f.filename === suggestion.filename);
+            const file = files.find((f: any) => f.filename === suggestion.filename);
             if (!file || !file.patch) continue;
 
             // Convert line number to position in the diff
@@ -170,7 +168,7 @@ async function createLineComments({
             if (!body) continue;
             // console.log(`Body for ${suggestion.filename}:${suggestion.line} is:`, body);
 
-            await octokit.pulls.createReviewComment({
+            await octokit.rest.pulls.createReviewComment({
                 owner,
                 repo,
                 pull_number: pullNumber,
@@ -252,7 +250,7 @@ async function createSummaryComment({
         groupedSuggestions.low.length;
 
     if (totalSuggestions === 0) {
-        await octokit.issues.createComment({
+        await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pullNumber,
@@ -287,7 +285,7 @@ ${groupedSuggestions.low.map(s => `- **${s.filename}:${s.line}** - ${s.message}`
 ---
 *Powered by AI Code Review Bot* 🤖`;
 
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
         owner,
         repo,
         issue_number: pullNumber,
@@ -327,44 +325,6 @@ ${suggestion.message}
 **Reasoning:** ${suggestion.reasoning}`;
 
     if (suggestion.suggestedChange && suggestion.suggestedChange.trim() !== '') {
-        comment += `
-
-**Suggested change:**
-\`\`\`suggestion
-${suggestion.suggestedChange}
-\`\`\``;
-    }
-
-    return comment;
-}
-
-function formatReviewComment2(suggestion: ReviewSuggestion): string {
-    const severityEmoji = {
-        "high": '🚨',
-        "medium": '⚠️',
-        "low": '💡'
-    };
-
-    const typeEmoji = {
-        security: '🔒',
-        performance: '⚡',
-        issue: '🐛',
-        suggestion: '💡',
-        nitpick: '✨',
-        other: '📝',
-        logic: '🔍',
-        style: '🎨',
-        readability: '📖',
-        bug: '🐞',
-    };
-
-    let comment = `${severityEmoji[suggestion.severity]} ${typeEmoji[suggestion.type]} **${suggestion.type.toUpperCase()}** (${suggestion.severity} priority)
-
-${suggestion.message}
-
-**Reasoning:** ${suggestion.reasoning}`;
-
-    if (suggestion.suggestedChange) {
         comment += `
 
 **Suggested change:**

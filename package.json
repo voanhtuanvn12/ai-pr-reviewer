@@ -1,0 +1,37 @@
+{
+  "name": "ai-pr-reviewer-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered PR reviewer GitHub Action",
+  "author": "tuan-vo",
+  "license": "ISC",
+  "homepage": "https://github.com/tuan-vo/my-pr-reviewer",
+  "keywords": [
+    "github-action",
+    "ai",
+    "code-review",
+    "pr-reviewer"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:action": "tsup",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@octokit/rest": "^22.0.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.3.3",
+    "vitest": "^3.2.3"
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "type": "module"
+}

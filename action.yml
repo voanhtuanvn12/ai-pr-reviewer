@@ -1,0 +1,49 @@
+name: 'AI PR Reviewer'
+description: 'Automated AI-powered code review for Pull Requests'
+author: 'tuan-vo'
+branding:
+  icon: 'eye'
+  color: 'blue'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+    default: ${{ github.token }}
+  
+  copilot-token:
+    description: 'GitHub Copilot token for AI analysis'
+    required: false
+    
+  openai-api-key:
+    description: 'OpenAI API key for GPT models'
+    required: false
+    
+  anthropic-api-key:
+    description: 'Anthropic API key for Claude models'
+    required: false
+    
+  ai-provider:
+    description: 'AI provider to use (copilot, openai, anthropic)'
+    required: false
+    default: 'copilot'
+    
+  review-level:
+    description: 'Review level (high, medium, low)'
+    required: false
+    default: 'medium'
+    
+  exclude-patterns:
+    description: 'File patterns to exclude from review (comma-separated)'
+    required: false
+    default: '*.md,*.txt,*.json,package-lock.json'
+
+outputs:
+  suggestions-count:
+    description: 'Number of suggestions generated'
+  review-status:
+    description: 'Status of the review (success, failed, skipped)'
+
+runs:
+  using: 'node20'
+  main: 'dist/action.js'

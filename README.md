@@ -411,7 +411,7 @@ npm install
 # Build the action
 npm run build
 
-# The compiled output will be in dist/action.js
+# The compiled output will be in dist/action.cjs
 ```
 
 ### Important Notes

@@ -1,4 +1,12 @@
 // GitHub Action entry point
+
+// Polyfill fetch for Node.js environments if needed
+if (!globalThis.fetch) {
+  import('node-fetch').then(nodeFetch => {
+    globalThis.fetch = nodeFetch.default as any;
+  });
+}
+
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { analyzeCodeChanges } from './service/ai/codeReviewer';

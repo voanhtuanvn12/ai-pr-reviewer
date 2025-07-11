@@ -168,6 +168,7 @@ async function callCopilot(prompt: string): Promise<string> {
 }
 
 async function callOpenAI(prompt: string): Promise<string> {
+    const fetch = (await import('node-fetch')).default;
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -191,11 +192,12 @@ async function callOpenAI(prompt: string): Promise<string> {
         })
     });
 
-    const data = await response.json();
+    const data = await response.json() as any;
     return data.choices[0].message.content;
 }
 
 async function callClaude(prompt: string): Promise<string> {
+    const fetch = (await import('node-fetch')).default;
     const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
@@ -215,11 +217,12 @@ async function callClaude(prompt: string): Promise<string> {
         })
     });
 
-    const data = await response.json();
+    const data = await response.json() as any;
     return data.content[0].text;
 }
 
 async function callLocalAI(prompt: string): Promise<string> {
+    const fetch = (await import('node-fetch')).default;
     const response = await fetch(`${process.env.LOCAL_AI_URL}/v1/chat/completions`, {
         method: 'POST',
         headers: {
@@ -238,7 +241,7 @@ async function callLocalAI(prompt: string): Promise<string> {
         })
     });
 
-    const data = await response.json();
+    const data = await response.json() as any;
     return data.choices[0].message.content;
 }
 

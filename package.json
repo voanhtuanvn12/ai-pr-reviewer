@@ -15,7 +15,9 @@
   "scripts": {
     "build": "tsup",
     "build:action": "tsup",
-    "test": "vitest"
+    "test": "vitest",
+    "package": "npm run build && git add dist/",
+    "release": "npm run package && git commit -m 'Update compiled action' && git push"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",

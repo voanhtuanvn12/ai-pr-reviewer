@@ -398,6 +398,42 @@ src/
 - **Context window**: 10 lines before/after changes for better AI understanding
 - **Concurrent reviews**: Supports multiple PRs simultaneously
 
+## 🛠️ Development
+
+### Building the Action
+
+This action is written in TypeScript and needs to be compiled before use:
+
+```bash
+# Install dependencies
+npm install
+
+# Build the action
+npm run build
+
+# The compiled output will be in dist/action.js
+```
+
+### Important Notes
+
+- The `dist/` directory must be committed to the repository for GitHub Actions to work
+- Always run `npm run build` after making changes to TypeScript files
+- Use `npm run package` to build and stage the dist files for commit
+
+### Development Workflow
+
+```bash
+# Make changes to TypeScript files
+# Build the action
+npm run build
+
+# Add the compiled files to git
+git add dist/
+
+# Commit your changes
+git commit -m "Your commit message"
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please:

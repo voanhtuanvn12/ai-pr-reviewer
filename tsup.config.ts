@@ -9,5 +9,5 @@ export default defineConfig({
     sourcemap: false,
     minify: false,
     outDir: "./dist",
-    outExtension: () => ({ js: '.js' }),
+    outExtension: () => ({ js: '.cjs' }),
 });
